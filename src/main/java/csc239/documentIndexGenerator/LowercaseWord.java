@@ -1,3 +1,5 @@
+package csc239.documentIndexGenerator;
+
 
 import java.util.ArrayList;
 
