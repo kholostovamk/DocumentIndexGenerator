@@ -9,8 +9,43 @@ package csc239.documentIndexGenerator;
  *
  * @author admin
  */
-public class Occurence {
+class Occurence {
 
-    int lineNum;
-    int wordNum;
+   private int lineNum;
+   private int wordNum;
+
+//setters
+public void setLineNum(int lineNum){
+    this.lineNum = lineNum;
+}
+
+public void setwordNum(int wordNum){
+    this.wordNum = wordNum;
+}
+
+//getters
+
+public int getLineNum() {
+    return this.lineNum;
+}
+
+public int getWordNum() {
+    return this.wordNum;
+}
+
+//The Occurrence class has a constructor that takes two int parameters: lineNum and wordNum.
+
+    public Occurence(int lineNum, int wordNum){
+        this.lineNum = lineNum;
+        this.wordNum = wordNum;
+}
+//The Occurrence class also has a toString() method that returns a String object in thefollowing format:(lineNum, wordNum)*/
+
+public String toString() {
+    
+    return null;
+}
+    
+    
+    
 }
