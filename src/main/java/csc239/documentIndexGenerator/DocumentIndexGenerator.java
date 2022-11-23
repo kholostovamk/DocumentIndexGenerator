@@ -40,7 +40,16 @@ public class DocumentIndexGenerator {
     
     System.out.println(fileName); // - works
     
-  //  docFile = new File(fileName);
+    String text = readString(fileName);
+    System.out.println(text);
+    
+    String[] arrOfStrings = text.toLowerCase().split(" ");
+   
+    for (String a : arrOfStrings)
+            System.out.println(a);
+    
+
+    
     
   //array of strings -> object
   //create an object of lowercase word for a string
@@ -50,6 +59,26 @@ public class DocumentIndexGenerator {
   //built always sorted list? compare with item in the list
 
     }
+   
+    public static String readString(String file) throws FileNotFoundException{
+        docFile = new File(fileName);
+        
+        String text = " ";
+        
+        try {
+            Scanner s = new Scanner(docFile);
+            while(s.hasNext()){
+                text = text + s.next()+ " ";
+            }
+        
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+       
+        
+        return text;
+}
 }
 
 
