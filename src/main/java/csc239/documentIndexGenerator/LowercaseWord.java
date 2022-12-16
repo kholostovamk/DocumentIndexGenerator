@@ -12,20 +12,31 @@ import java.util.List;
  *
  * @author admin
  */
-class LowercaseWord  {
+class LowercaseWord  implements
+Comparable<LowercaseWord> {
 
     private String lowerCaseText;
     private int occurenceCount = 1;
     private ArrayList<Occurence> refList;
     
-  // private String word;
-  //private int noOfOccurences;
-  //private List<Occurence> occurences;
-  public LowercaseWord(String lowerCaseText) {
+    public LowercaseWord(String lowerCaseText) {
     this.lowerCaseText = lowerCaseText;
     this.occurenceCount = 1;
     refList = new ArrayList<>();
   }
+
+    public String getLowerCaseText () 
+    { return this.lowerCaseText;
+    }
+    
+    
+
+    LowercaseWord(String word, int lineNum, int wordNum) {
+        
+        this.lowerCaseText = word;
+        
+       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
   // adding occurence of a word
   public void addOccurence(int lineNum, int wordNum) {
     Occurence occurence = new Occurence(lineNum,wordNum);
@@ -38,6 +49,12 @@ class LowercaseWord  {
   }
   
   public String getWord() { return lowerCaseText; }
+
+  
+  public int compareTo(LowercaseWord word2) {
+        return this.getWord().compareTo(word2.getWord());
+    }
+
   
   
   @Override
@@ -55,4 +72,5 @@ class LowercaseWord  {
     string += "]";
     return string;
   }
+}
 

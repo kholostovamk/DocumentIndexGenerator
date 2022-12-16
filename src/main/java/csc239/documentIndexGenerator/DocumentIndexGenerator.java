@@ -6,11 +6,9 @@ package csc239.documentIndexGenerator;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -38,7 +36,7 @@ public class DocumentIndexGenerator {
 
     private static String fileName;
     private static File docFile;
-    private static ArrayList<LowercaseWord> wordList;
+    private static ArrayList<LowercaseWord> wordList = new ArrayList<LowercaseWord>();
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
@@ -51,7 +49,7 @@ public class DocumentIndexGenerator {
     Scanner input = new Scanner(System.in);
     fileName = input.nextLine().trim(); 
     
-   // System.out.println(fileName); // - works
+    System.out.println(fileName); // - works
    
    docFile = new File(fileName);
     
@@ -63,10 +61,6 @@ public class DocumentIndexGenerator {
     
    // String[] words = text.toLowerCase().split(" ");
    
-
-    
-
-    
     
   //array of strings -> object
   //create an object of lowercase word for a string
@@ -84,15 +78,35 @@ public class DocumentIndexGenerator {
         return lowerWord;
       }
     }
-   // return null;
+    return null;
   }
-
+    
+    public static void  recordNewOccurence(String word, int lineNum, int wordNum) {
+    
+        LowercaseWord candidate = new LowercaseWord(word);
+        
+        for (int i=0; i <wordList.size(); i++) {
+            
+            int result = candidate.compareTo(wordList.get(i));
+            
+            if (result <0) {
+                wordList.add(i, candidate);
+                candidate.addOccurence(lineNum, wordNum);
+                return;
+            }
+            
+            if (result ==0) {
+                wordList.get(i).addOccurence(lineNum, wordNum);
+                return;
+            } 
+        }
+        
+    }
    
+    
     public static void readString(String file, String[] words ) throws FileNotFoundException, IOException{
         
-       
-      //  FileInputStream fileInputStream = new FileInputStream(fileName);
-       // InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+      
         BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
   
         String line;
@@ -110,7 +124,8 @@ public class DocumentIndexGenerator {
                     wordNum++;
                     word = word.toLowerCase();
                     
-                    LowercaseWord lowerWord= getWordFromList(word);
+                   LowercaseWord lowerWord= getWordFromList(word);
+                  recordNewOccurence(word, lineNum, wordNum);
                     
                     if (lowerWord == null) {
                         lowerWord = new LowercaseWord (word);
@@ -128,30 +143,3 @@ public class DocumentIndexGenerator {
     }
 }
        
-       
-      
-
-
-
-
-/*public static String readString(String file, String[] words) throws FileNotFoundException{
-        docFile = new File(fileName);
-       
-        String text = " ";
-        
-        try {
-            Scanner s = new Scanner(docFile);
-            while(s.hasNextLine()){
-                text = text + s.nextLine();
-                lineNum++;
-            }
-        
-        }
-        catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        }
-       
-        
-        return text;
-}
-}*/
